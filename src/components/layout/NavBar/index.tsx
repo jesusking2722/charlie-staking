@@ -5,7 +5,7 @@ import { useWallet } from "../../../context/WalletContext";
 import { ConnectButton, WalletButton } from "@rainbow-me/rainbowkit";
 
 const style = {
-  link: "text-base font-normal z-10 hover:bg-gradient-to-r hover:from-[#ce89ca] hover:via-[#5885BF] hover:via-[#7258DF] hover:to-[#75eea3] hover:bg-clip-text hover:text-transparent transition-all duration-300 ease-in-out "
+  link: "text-base font-normal z-10 hover:bg-gradient-to-r hover:from-[#ce89ca] hover:via-[#5885BF] hover:via-[#7258DF] hover:to-[#75eea3] hover:bg-clip-text hover:text-transparent transition-all duration-300 ease-in-out ",
 };
 
 interface NavBarProps {
@@ -44,8 +44,8 @@ const NavBar: React.FC<NavBarProps> = ({
       <nav className="basis-5/6 nav-wrapper relative h-[60px] bg-[#444444]">
         <div className="flex items-center nav-wrapper justify-between inset-[1px] absolute bg-[#1C1C1C] px-5">
           <div className="flex flex-row items-center justify-center gap-20 2xl:gap-20 xl:gap-20 lg:gap-20 md:gap-10">
-            <h3 className="gradient-text font-semibold text-2xl">Logo</h3>
-            <div className="hidden 2xl:block xl:block lg:block md:block sm:hidden">
+            <img src="./logo.png" alt="LOGO" className="w-[60px] h-[60px]" />
+            {/* <div className="hidden 2xl:block xl:block lg:block md:block sm:hidden">
               <div className="flex flex-row items-center gap-20">
                 <Link
                   to="/swap"
@@ -65,17 +65,8 @@ const NavBar: React.FC<NavBarProps> = ({
                 >
                   Staking
                 </Link>
-                <Link
-                  to="/marketplace"
-                  className={`${style.link} ${
-                    active === "marketplace" ? "gradient-text" : "text-white"
-                  }`}
-                  onClick={() => setActive("marketplace")}
-                >
-                  Marketplace
-                </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>
@@ -83,7 +74,11 @@ const NavBar: React.FC<NavBarProps> = ({
         <div className="connect-wrapper w-full h-[60px] bg-gradient relative">
           <div className="connect-wrapper inset-[3px] bg-white absolute">
             <div className="hidden 2xl:block xl:block lg:block md:block sm:hidden">
-            <ConnectButton label="Connect wallet" accountStatus="address" showBalance={false} />
+              <ConnectButton
+                label="Connect wallet"
+                accountStatus="address"
+                showBalance={false}
+              />
               {/* <button
                 className="text-white connect-wrapper inset-[1px] absolute bg-gradient flex items-center justify-center"
                 onClick={() => {

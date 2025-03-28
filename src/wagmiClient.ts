@@ -1,45 +1,29 @@
-import { http} from "wagmi";
-import { base, Chain } from "wagmi/chains";
+import { http } from "wagmi";
+import { bscTestnet } from "wagmi/chains";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import {metaMaskWallet, trustWallet, bitgetWallet, okxWallet} from "@rainbow-me/rainbowkit/wallets";
+import {
+  metaMaskWallet,
+  trustWallet,
+  bitgetWallet,
+  okxWallet,
+} from "@rainbow-me/rainbowkit/wallets";
 
-const projectId = '333d74634b970c7e1d46fc856f2aa167';
-
-export const customChain: Chain = {
-  id: 84532,
-  name: 'Base Sepolia',
-  rpcUrls: {
-    default: {http: ["https://base-sepolia-rpc.publicnode.com"], webSocket: ["https://base-sepolia-rpc.publicnode.com"]}
-  },
-  nativeCurrency: {
-    name: 'TA',
-    symbol: 'TA',
-    decimals: 18,
-  },
-  blockExplorers: {
-    default: {
-        name: "Basescan",
-        url: "https://basescan.org",
-        apiUrl: "https://api.basescan.org/api",
-    },
-  }
-};
+const projectId = "bb9ebb9fe72358fa4b2d4a79878e1c51";
 
 const wagmiConfig = getDefaultConfig({
-    appName: "Charlie_blockchain",
-    projectId,
-    wallets: [
-      {
-        groupName: 'Recommended',
-        wallets: [metaMaskWallet, trustWallet, bitgetWallet, okxWallet],
-      },
-    ],
-    chains: [base],
-    transports: {
-      [base.id]: http(),
-      // [customChain.id]: http(),
+  appName: "Staking | Charlie Unicorn AI",
+  projectId,
+  wallets: [
+    {
+      groupName: "Recommended",
+      wallets: [metaMaskWallet, trustWallet, bitgetWallet, okxWallet],
     },
-    ssr: true
+  ],
+  chains: [bscTestnet],
+  transports: {
+    [bscTestnet.id]: http("https://rpc.ankr.com/bsc_testnet_chapel/1b49ccfb464d3a36778d62cd26f29d2da87e099d5ed6229c15bc1627cee80453");
+  },
+  ssr: true,
 });
 
 export default wagmiConfig;

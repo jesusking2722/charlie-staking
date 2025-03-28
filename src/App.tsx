@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import Container from './components/layout/Container';
-import NavBar from './components/layout/NavBar';
-import Footer from './components/layout/Footer';
-import Web3Modal from './components/common/Web3Modal';
-import { WagmiProvider } from 'wagmi';
-import wagmiConfig, { customChain } from './wagmiClient';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WalletProvider } from './context/WalletContext';
-import {RainbowKitProvider, darkTheme} from "@rainbow-me/rainbowkit";
-import MobileNavBar from './components/layout/MobileNavbar';
-import { ContractProvider } from './context/ContractContext';
-import { StakingProvider } from './context/StakingContext';
-import RouterComponent from './routes';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Container from "./components/layout/Container";
+import NavBar from "./components/layout/NavBar";
+import Footer from "./components/layout/Footer";
+import Web3Modal from "./components/common/Web3Modal";
+import { WagmiProvider } from "wagmi";
+import wagmiConfig, { customChain } from "./wagmiClient";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WalletProvider } from "./context/WalletContext";
+import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
+import MobileNavBar from "./components/layout/MobileNavbar";
+import { ContractProvider } from "./context/ContractContext";
+import { StakingProvider } from "./context/StakingContext";
+import RouterComponent from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from 'react-router-dom';
-import '@rainbow-me/rainbowkit/styles.css';
-import { base } from 'viem/chains';
+import { useNavigate } from "react-router-dom";
+import "@rainbow-me/rainbowkit/styles.css";
+import { bscTestnet } from "wagmi/chains";
 
 const queryClient = new QueryClient();
 
@@ -34,16 +34,30 @@ function App() {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme()} initialChain={base}>
+        <RainbowKitProvider theme={darkTheme()} initialChain={bscTestnet}>
           <WalletProvider>
             <ContractProvider>
               <StakingProvider>
                 <Container>
-                  <NavBar setWeb3Modal={setWeb3modal} setMobileNavOpen={setMobileNavOpen} mobileNavOpen={mobileNavOpen} navIcon={navIcon} setNavIcon={setNavIcon}  />
-                  <MobileNavBar isOpen={mobileNavOpen} setWeb3Modal={setWeb3modal} setOpen={setMobileNavOpen} setNavIcon={setNavIcon} />
+                  <NavBar
+                    setWeb3Modal={setWeb3modal}
+                    setMobileNavOpen={setMobileNavOpen}
+                    mobileNavOpen={mobileNavOpen}
+                    navIcon={navIcon}
+                    setNavIcon={setNavIcon}
+                  />
+                  <MobileNavBar
+                    isOpen={mobileNavOpen}
+                    setWeb3Modal={setWeb3modal}
+                    setOpen={setMobileNavOpen}
+                    setNavIcon={setNavIcon}
+                  />
                   <RouterComponent />
                   <Footer />
-                  <Web3Modal web3modal={web3modal} setWeb3Modal={setWeb3modal} />
+                  <Web3Modal
+                    web3modal={web3modal}
+                    setWeb3Modal={setWeb3modal}
+                  />
                   <ToastContainer theme="dark" />
                 </Container>
               </StakingProvider>
